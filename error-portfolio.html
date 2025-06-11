@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio Website</title>
+    <style>
+      body {
+        background-color: #111;
+        color: white;
+        font-family: monospace;
+        padding: 20px;
+      }
+
+      h1 {
+        border-bottom: 1px solid white;
+        padding-bottom: 5px;
+      }
+
+      details {
+        margin-bottom: 10px;
+      }
+
+      summary {
+        cursor: pointer;
+        position: relative;
+        padding-left: 10px;
+      }
+
+      summary::before {
+        content: "<item> ";
+        color: #5db0d7;
+        font-weight: bold;
+      }
+
+      summary::after {
+        content: " </item>";
+        color: #5db0d7;
+        font-weight: bold;
+      }
+
+      #terminal {
+        background-color: #181818;
+        padding: 10px;
+        overflow-x: auto;
+        color: #ccc;
+        font-family: monospace;
+        white-space: pre;
+        min-height: 150px;
+      }
+
+      .cursor::after {
+        content: "█";
+        animation: blink 1s steps(1) infinite;
+        color: white;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .tag {
+        color: #e88e60;
+      }
+
+      #main-content {
+        display: none;
+        opacity: 0;
+        transition: opacity 1s ease-in;
+      }
+
+      #main-content.visible {
+        display: block;
+        opacity: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>My Portfolio Website</h1>
+
+    <pre id="terminal" class="cursor"></pre>
+
+    <!-- All content hidden initially -->
+    <div id="main-content">
+      <details open>
+        <summary>Who am I?</summary>
+        <p><span class="tag">&lt;description&gt;</span> I'm Priyanshu, a Computer Science student passionate about Cybersecurity, System Engineering, and building tools that matter. <span class="tag">&lt;/description&gt;</span></p>
+      </details>
+
+      <details open>
+        <summary>What I Do</summary>
+        <p><span class="tag">&lt;description&gt;</span> I explore the intersections of software engineering, ethical hacking, and digital system design. <span class="tag">&lt;/description&gt;</span></p>
+      </details>
+
+      <details>
+        <summary>Projects</summary>
+        <p><span class="tag">&lt;description&gt;</span></p>
+        <ul>
+          <li>Password Manager</li>
+          <li>Booking System</li>
+          <li>Cybersecurity tools and internal utilities</li>
+          <li>Ongoing: ABC </li>
+        </ul>
+        <p><span class="tag">&lt;/description&gt;</span></p>
+      </details>
+
+      <details>
+        <summary>GitHub</summary>
+        <p>
+          <span class="tag">&lt;link&gt;</span>
+          <a href="https://github.com/prxcode" target="_blank" style="color:#9abad9; text-decoration: none;">https://github.com/prxcode</a>
+          <span class="tag">&lt;/link&gt;</span>
+        </p>
+      </details>
+
+      <details>
+        <summary>Vision</summary>
+        <p><span class="tag">&lt;description&gt;</span> To build and share tools that empower ethical hackers, CS learners, and system engineers to innovate securely. <span class="tag">&lt;/description&gt;</span></p>
+      </details>
+
+      <details>
+        <summary>Contact</summary>
+        <p><span class="tag">&lt;contact&gt;</span> <a href="mailto:example@gmail.com" target="_blank" style="color:#9abad9; text-decoration: none;">Email</a> <span class="tag">&lt;/contact&gt;</span></p>
+        <p><span class="tag">&lt;contact&gt;</span> <a href="https://www.linkedin.com/in/example/" target="_blank" style="color:#9abad9; text-decoration: none;">linkedin</a> <span class="tag">&lt;/contact&gt;</span></p>
+      </details>
+
+      <pre>
+[FATAL] Segmentation Fault in CoreModule::Security::RedTeam
+[INFO] Attempting memory dump...
+[INFO] Dump saved: /logs/prx.mem.09235
+[NOTE] Cybersecurity stack traced back to `RedOps v2`
+[INFO] Portfolio loaded with anomalies :: expected behavior for prxcode
+      </pre>
+    </div>
+
+    <script>
+      const terminal = document.getElementById('terminal');
+      const content = document.getElementById('main-content');
+
+      const lines = [
+        "[FATAL] Segmentation Fault in CoreModule::Security::RedTeam",
+        "[INFO] Attempting memory dump...",
+        "[INFO] Dump saved: /logs/prx.mem.09235",
+        "[NOTE] Cybersecurity stack traced back to `RedOps v2`",
+        "[INFO] Portfolio loaded with anomalies :: expected behavior for prxcode"
+      ];
+
+      let currentLine = 0;
+
+      function typeNextLine() {
+        if (currentLine < lines.length) {
+          terminal.textContent += lines[currentLine] + '\n';
+          currentLine++;
+          setTimeout(typeNextLine, 500); // Adjust speed here
+        } else {
+          // Reveal content after animation
+          content.classList.add("visible");
+        }
+      }
+
+      window.onload = typeNextLine;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>prxcode :: Portfolio Terminal</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 20px;
+      font-size: 16px;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      line-height: 1.5;
+      min-height: 90vh;
+    }
+
+    .cursor::after {
+      content: '█';
+      animation: blink 1s steps(1) infinite;
+      color: #00ff00;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    #input-line {
+      color: #00ff00;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'Courier New', Courier, monospace;
+      width: 100%;
+      font-size: 1em;
+    }
+
+    .prompt {
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal" class="cursor"></div>
+  <div class="prompt">prxcode@terminal:~$ <input type="text" id="input-line" autofocus /></div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const inputLine = document.getElementById('input-line');
+
+    const bootLines = [
+      "Booting prxcode terminal...",
+      "[+] Loading modules...",
+      "[+] Establishing secure connection...",
+      "[INFO] Welcome, Priyanshu.",
+      "[INFO] Portfolio Terminal v1.0",
+      "",
+      "Type `about` to learn more or `projects` to list work..."
+    ];
+
+    const responses = {
+      help: `Available commands:\n- about\n- projects\n- github\n- contact\n- vision\n- clear`,
+      about: "I'm Priyanshu, a Computer Science student passionate about Cybersecurity, System Engineering, and building tools that matter.",
+      projects: `- Many projects check my github for more details.\n- I focus on ethical hacking, system engineering, and CS learning tools.`,
+      github: 'https://github.com/prxcode',
+      contact: 'Email: example@gmail.com\nLinkedIn: https://www.linkedin.com/in/example/',
+      vision: 'To build and share tools that empower ethical hackers, CS learners, and system engineers to innovate securely.',
+      clear: 'clear'
+    };
+
+    let lineIndex = 0;
+
+    function typeBootLines() {
+      if (lineIndex < bootLines.length) {
+        terminal.innerHTML += bootLines[lineIndex] + '\n';
+        lineIndex++;
+        setTimeout(typeBootLines, 400);
+      } else {
+        terminal.classList.remove('cursor');
+      }
+    }
+
+    window.onload = typeBootLines;
+
+    inputLine.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        const command = inputLine.value.trim();
+        const promptText = `prxcode@terminal:~$ ${command}\n`;
+        inputLine.value = '';
+
+        if (command === 'clear') {
+          terminal.innerHTML = '';
+          return;
+        }
+
+        const output = responses[command] || `Command not found: ${command}`;
+        terminal.innerHTML += `\n${promptText}${output}\n`;
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>
